@@ -1,7 +1,7 @@
 class Member {
-  final String name;
+  final String firstName;
   final String gitLink;
-  final String gradYear;
+  final int gradYear;
   final String intResp;
   final String joinedOn;
   final String lastName;
@@ -12,7 +12,7 @@ class Member {
   final String email;
 
   Member({
-    required this.name,
+    required this.firstName,
     required this.gitLink,
     required this.gradYear,
     required this.intResp,
@@ -28,15 +28,15 @@ class Member {
   //from json to object
   factory Member.fromJson(json) {
     return Member(
-      name: json['name'],
-      gitLink: json['githib_link'],
+      firstName: json['first_name'],
+      gitLink: json['github_link'],
       gradYear: json['graduation_year'],
-      intResp: json['interest_responce'],
+      intResp: json['interest_response'],
       joinedOn: json['joined_on'],
       lastName: json['last_name'],
       linkedin: json['linkedin_link'],
       major: json['major'],
-      refResp: json['referral_responce'],
+      refResp: json['referral_response'],
       status: json['status'],
       email: json['umass_email'],
     );
@@ -45,7 +45,7 @@ class Member {
 //from object to json
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'first_name': firstName,
       'githib_link': gitLink,
       'graduation_year': gradYear,
       'interest_responce': intResp,
