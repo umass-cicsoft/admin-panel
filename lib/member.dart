@@ -46,14 +46,14 @@ class Member {
   Map<String, dynamic> toJson() {
     return {
       'first_name': firstName,
-      'githib_link': gitLink,
+      'github_link': gitLink,
       'graduation_year': gradYear,
-      'interest_responce': intResp,
+      'interest_response': intResp,
       'joined_on': joinedOn,
       'last_name': lastName,
       'linkedin_link': linkedin,
       'major': major,
-      'referral_responce': refResp,
+      'referral_response': refResp,
       'status': status,
       'umass_email': email,
     };
