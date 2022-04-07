@@ -8,6 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseDatabase database = FirebaseDatabase.instance;
+  //! Remove before further use
   printUserData(database, 'sahgupta');
   runApp(const MyApp());
 }
