@@ -12,6 +12,8 @@ void main() async {
   runApp(const MyApp());
 }
 
+// function takes in the database and a username. It pretty prints the user's data using
+// JsonEncoder
 void printUserData(FirebaseDatabase database, String username) async {
   DatabaseReference ref = database.ref("/members");
   final testUserData = await ref.child('/$username').get();
@@ -20,7 +22,7 @@ void printUserData(FirebaseDatabase database, String username) async {
     String prettyUserData = encoder.convert(testUserData.value);
     print(prettyUserData);
   } else {
-    print("No data available!");
+    print("No user data available!");
   }
 }
 
