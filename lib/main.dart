@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'dart:convert';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseDatabase database = FirebaseDatabase.instance;
+  printUserData(database, 'sahgupta');
   runApp(const MyApp());
+}
+
+void printUserData(FirebaseDatabase database, String username) async {
+  DatabaseReference ref = database.ref("/members");
+  final testUserData = await ref.child('/$username').get();
+  if (testUserData.exists) {
+    const JsonEncoder encoder = JsonEncoder.withIndent("  ");
+    String prettyUserData = encoder.convert(testUserData.value);
+    print(prettyUserData);
+  } else {
+    print("No data available!");
+  }
 }
 
 class MyApp extends StatelessWidget {
