@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'dart:convert';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseDatabase database = FirebaseDatabase.instance;
   runApp(const MyApp());
 }
+
+// function takes in the database and a username. It pretty prints the user's data using
+// JsonEncoder
+
+// void printUserData(FirebaseDatabase database, String username) async {
+//   DatabaseReference ref = database.ref("/members");
+//   final testUserData = await ref.child('/$username').get();
+//   if (testUserData.exists) {
+//     const JsonEncoder encoder = JsonEncoder.withIndent("  ");
+//     String prettyUserData = encoder.convert(testUserData.value);
+//     print(prettyUserData);
+//   } else {
+//     print("No user data available!");
+//   }
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
