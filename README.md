@@ -17,7 +17,7 @@
 
 ## Technology Stack
 
-- **Flutter** (Dart): Ideal tooling for building multi-platform applications, especially in context of future projects.
+- **React** (JavaScript): Ideal tooling for building web applications, especially in context of future projects.
 
 - **Flask** (Python): CICapi is built on Flask, so we could either integrate it into this (monolith), or deploy as microservices.
 
@@ -25,11 +25,11 @@
 
 ## Reference Materials
 
-### Flutter
+### React
 
-- [Official Flutter Documentation](https://docs.flutter.dev)
+- [Official React Documentation](https://reactjs.org/)
 
-- [Awesome Flutter Libraries, Tools, Tutorials, Articles, etc.](https://github.com/Solido/awesome-flutter)
+- [Awesome React Libraries, Tools, Tutorials, Articles, etc.](https://github.com/enaqx/awesome-react)
 
 ### Flask
 
