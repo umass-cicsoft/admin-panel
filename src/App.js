@@ -1,10 +1,22 @@
-import './App.css';
+import React from 'react';
+import styled from 'styled-components';
+import { ProSidebarProvider } from 'react-pro-sidebar';
 
-function App() {
+import { NavigationBar } from './components';
+
+const AppContainer = styled.div`
+  text-align: center;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+`;
+
+export default function App() {
   return (
-    <div className="App">
-    </div>
+    <ProSidebarProvider>
+      <AppContainer>
+        <NavigationBar/>
+      </AppContainer>
+    </ProSidebarProvider>
   );
 }
-
-export default App;
