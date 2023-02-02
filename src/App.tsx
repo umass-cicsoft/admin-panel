@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { ProSidebarProvider } from 'react-pro-sidebar';
+import React from "react";
+import styled from "styled-components";
+import { ProSidebarProvider } from "react-pro-sidebar";
 
-import { NavigationBar } from './components';
+import { NavigationBar } from "./components";
 
 const AppContainer = styled.div`
   text-align: center;
@@ -15,7 +15,7 @@ export default function App() {
   return (
     <ProSidebarProvider>
       <AppContainer>
-        <NavigationBar/>
+        <NavigationBar />
       </AppContainer>
     </ProSidebarProvider>
   );
