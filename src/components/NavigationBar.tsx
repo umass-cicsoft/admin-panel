@@ -15,9 +15,6 @@ import {
   faPeopleGroup,
   faUserSecret,
   faToolbox,
-  faUserPen,
-  faUserCheck,
-  faMagnifyingGlass,
   faPenToSquare,
   faWarehouse,
   faHashtag,
@@ -102,22 +99,9 @@ export default function NavigationBar() {
               <StyledMenuItem icon={<FontAwesomeIcon icon={faHouse} />}>
                 Dashboard
               </StyledMenuItem>
-              <StyledSubMenu
-                label="Members"
-                icon={<FontAwesomeIcon icon={faUsers} />}
-              >
-                <StyledMenuItem icon={<FontAwesomeIcon icon={faUserPen} />}>
-                  Manage Members
-                </StyledMenuItem>
-                <StyledMenuItem icon={<FontAwesomeIcon icon={faUserCheck} />}>
-                  Verified Members
-                </StyledMenuItem>
-                <StyledMenuItem
-                  icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
-                >
-                  Search Members
-                </StyledMenuItem>
-              </StyledSubMenu>
+              <StyledMenuItem icon={<FontAwesomeIcon icon={faUsers} />}>
+                Members
+              </StyledMenuItem>
               <StyledSubMenu
                 label="Core Team"
                 icon={<FontAwesomeIcon icon={faPeopleGroup} />}
