@@ -1,0 +1,3 @@
+.customizedMenu :global(.ps-submenu-content) {
+  width: min-content !important;
+}
