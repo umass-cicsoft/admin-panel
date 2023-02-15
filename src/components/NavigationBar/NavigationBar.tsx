@@ -21,6 +21,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { CICSoftLogo, FallbackCICSoftLogo } from "../../assets";
 import { Image } from "../../utils";
+import { Link } from "react-router-dom";
 
 import styles from "./NavigationBar.module.css";
 
@@ -57,18 +58,22 @@ export default function NavigationBar() {
             </Menu>
             <hr style={{ margin: "0" }} />
             <Menu className={`w-full text-lg ${styles.customizedMenu}`}>
-              <MenuItem
-                className="flex w-full text-start"
-                icon={<FontAwesomeIcon icon={faHouse} />}
-              >
-                Dashboard
-              </MenuItem>
-              <MenuItem
-                className="flex w-full text-start"
-                icon={<FontAwesomeIcon icon={faUsers} />}
-              >
-                Members
-              </MenuItem>
+              <Link to={`dashboard`}>
+                <MenuItem
+                  className="flex w-full text-start"
+                  icon={<FontAwesomeIcon icon={faHouse} />}
+                >
+                  Dashboard
+                </MenuItem>
+              </Link>
+              <Link to={`members`}>
+                <MenuItem
+                  className="flex w-full text-start"
+                  icon={<FontAwesomeIcon icon={faUsers} />}
+                >
+                  Members
+                </MenuItem>
+              </Link>
               <SubMenu
                 className="w-full text-start"
                 label="Core Team"
@@ -105,12 +110,14 @@ export default function NavigationBar() {
               >
                 Development Team
               </MenuItem>
-              <MenuItem
-                className="flex w-full text-start"
-                icon={<FontAwesomeIcon icon={faToolbox} />}
-              >
-                Administration
-              </MenuItem>
+              <Link to={`administration`}>
+                <MenuItem
+                  className="flex w-full text-start"
+                  icon={<FontAwesomeIcon icon={faToolbox} />}
+                >
+                  Administration
+                </MenuItem>
+              </Link>
             </Menu>
           </div>
           <Menu classname="w-full text-lg">
