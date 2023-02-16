@@ -7,8 +7,7 @@ import {
 } from "react-pro-sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleDoubleLeft,
-  faAngleDoubleRight,
+  faBars,
   faHouse,
   faUsers,
   faPeopleGroup,
@@ -33,30 +32,24 @@ export default function NavigationBar() {
         <div className="flex flex-col h-fill justify-center">
           <div>
             <Menu className="w-full text-lg">
-              {collapsed ? (
-                <MenuItem
-                  className="flex w-full text-start"
-                  icon={<FontAwesomeIcon icon={faAngleDoubleRight} />}
-                  onClick={() => collapseSidebar(false)}
-                ></MenuItem>
-              ) : (
-                <MenuItem
-                  suffix={<FontAwesomeIcon icon={faAngleDoubleLeft} />}
-                  onClick={() => collapseSidebar(true)}
-                >
+              <MenuItem
+                className="flex w-full text-start"
+                icon={collapsed ? <FontAwesomeIcon icon={faBars} /> : null}
+                suffix={!collapsed ? <FontAwesomeIcon icon={faBars} /> : null}
+                onClick={() => collapseSidebar(!collapsed)}
+              >
+                {!collapsed && (
                   <div className="flex w-full text-center px-1 py-3">
                     <Image
                       src={FallbackCICSoftLogo}
                       srcSet={CICSoftLogo}
                       alt="CICSoft Logo"
-                      width="100%"
-                      height="auto"
                     />
                   </div>
-                </MenuItem>
-              )}
+                )}
+              </MenuItem>
             </Menu>
-            <hr style={{ margin: "0" }} />
+            <hr className="m-0" />
             <Menu className={`w-full text-lg ${styles.customizedMenu}`}>
               <Link to={`dashboard`}>
                 <MenuItem
