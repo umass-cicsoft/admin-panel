@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Dashboard",
+    "link": "dashboard",
+    "icon": "faHouse"
+  },
+  {
+    "name": "Members",
+    "link": "members",
+    "icon": "faUsers"
+  },
+  {
+    "name": "Core Team",
+    "link": "core-team",
+    "icon": "faPeopleGroup",
+    "subMenu": [
+      {
+        "name": "Manage Team",
+        "link": "manage",
+        "icon": "faPenToSquare"
+      },
+      {
+        "name": "Logistics Team",
+        "link": "logistics",
+        "icon": "faWarehouse"
+      },
+      {
+        "name": "Outreach Team",
+        "link": "outreach",
+        "icon": "faHashtag"
+      },
+      {
+        "name": "Teaching Team",
+        "link": "teaching",
+        "icon": "faChalkboard"
+      }
+    ]
+  },
+  {
+    "name": "Development Team",
+    "link": "development-team",
+    "icon": "faUserSecret"
+  },
+  {
+    "name": "Admin",
+    "link": "admin",
+    "icon": "faToolbox"
+  }
+]

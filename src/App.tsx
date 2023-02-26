@@ -7,6 +7,7 @@ export default function App() {
     <ProSidebarProvider>
       <div className="flex h-screen w-screen text-center">
         <NavigationBar />
+        {/* Outlet allows parent route display child route as a component */}
         <Outlet />
       </div>
     </ProSidebarProvider>
