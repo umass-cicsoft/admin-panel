@@ -7,8 +7,7 @@ import {
 } from "react-pro-sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleDoubleLeft,
-  faAngleDoubleRight,
+  faBars,
   faHouse,
   faUsers,
   faPeopleGroup,
@@ -21,8 +20,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { CICSoftLogo, FallbackCICSoftLogo } from "../../assets";
 import { Image } from "../../utils";
+import { Link } from "react-router-dom";
+import navigationData from "../../data/navigation.json";
 
 import styles from "./NavigationBar.module.css";
+
+const icons: any = {
+  faBars: faBars,
+  faHouse: faHouse,
+  faUsers: faUsers,
+  faPeopleGroup: faPeopleGroup,
+  faUserSecret: faUserSecret,
+  faToolbox: faToolbox,
+  faPenToSquare: faPenToSquare,
+  faWarehouse: faWarehouse,
+  faHashtag: faHashtag,
+  faChalkboard: faChalkboard,
+};
 
 export default function NavigationBar() {
   const { collapseSidebar, collapsed, rtl } = useProSidebar();
@@ -32,85 +46,69 @@ export default function NavigationBar() {
         <div className="flex flex-col h-fill justify-center">
           <div>
             <Menu className="w-full text-lg">
-              {collapsed ? (
-                <MenuItem
-                  className="flex w-full text-start"
-                  icon={<FontAwesomeIcon icon={faAngleDoubleRight} />}
-                  onClick={() => collapseSidebar(false)}
-                ></MenuItem>
-              ) : (
-                <MenuItem
-                  suffix={<FontAwesomeIcon icon={faAngleDoubleLeft} />}
-                  onClick={() => collapseSidebar(true)}
-                >
+              <MenuItem
+                className="flex w-full text-start"
+                icon={collapsed ? <FontAwesomeIcon icon={faBars} /> : null}
+                suffix={!collapsed ? <FontAwesomeIcon icon={faBars} /> : null}
+                onClick={() => collapseSidebar(!collapsed)}
+              >
+                {!collapsed && (
                   <div className="flex w-full text-center px-1 py-3">
                     <Image
                       src={FallbackCICSoftLogo}
                       srcSet={CICSoftLogo}
                       alt="CICSoft Logo"
-                      width="100%"
-                      height="auto"
                     />
                   </div>
-                </MenuItem>
-              )}
+                )}
+              </MenuItem>
             </Menu>
-            <hr style={{ margin: "0" }} />
+            <hr className="m-0" />
             <Menu className={`w-full text-lg ${styles.customizedMenu}`}>
-              <MenuItem
-                className="flex w-full text-start"
-                icon={<FontAwesomeIcon icon={faHouse} />}
-              >
-                Dashboard
-              </MenuItem>
-              <MenuItem
-                className="flex w-full text-start"
-                icon={<FontAwesomeIcon icon={faUsers} />}
-              >
-                Members
-              </MenuItem>
-              <SubMenu
-                className="w-full text-start"
-                label="Core Team"
-                icon={<FontAwesomeIcon icon={faPeopleGroup} />}
-              >
-                <MenuItem
-                  className="flex w-full text-start"
-                  icon={<FontAwesomeIcon icon={faPenToSquare} />}
-                >
-                  Manage Teams
-                </MenuItem>
-                <MenuItem
-                  className="flex w-full text-start"
-                  icon={<FontAwesomeIcon icon={faWarehouse} />}
-                >
-                  Logistics Team
-                </MenuItem>
-                <MenuItem
-                  className="flex w-full text-start"
-                  icon={<FontAwesomeIcon icon={faHashtag} />}
-                >
-                  Social Media Team
-                </MenuItem>
-                <MenuItem
-                  className="flex w-full text-start"
-                  icon={<FontAwesomeIcon icon={faChalkboard} />}
-                >
-                  Teaching Team
-                </MenuItem>
-              </SubMenu>
-              <MenuItem
-                className="flex w-full text-start"
-                icon={<FontAwesomeIcon icon={faUserSecret} />}
-              >
-                Development Team
-              </MenuItem>
-              <MenuItem
-                className="flex w-full text-start"
-                icon={<FontAwesomeIcon icon={faToolbox} />}
-              >
-                Administration
-              </MenuItem>
+              {navigationData.map((menuItem: any, idx: number) => {
+                if (menuItem.subMenu) {
+                  return (
+                    <SubMenu
+                      className="w-full text-start"
+                      label={menuItem.name}
+                      icon={<FontAwesomeIcon icon={icons[menuItem.icon]} />}
+                      key={idx}
+                    >
+                      {menuItem.subMenu.map(
+                        (subMenuItem: any, subIdx: number) => {
+                          return (
+                            <Link to={`${menuItem.link}/${subMenuItem.link}`}>
+                              <MenuItem
+                                className="flex w-full text-start"
+                                icon={
+                                  <FontAwesomeIcon
+                                    icon={icons[subMenuItem.icon]}
+                                  />
+                                }
+                                key={subIdx}
+                              >
+                                {subMenuItem.name}
+                              </MenuItem>
+                            </Link>
+                          );
+                        }
+                      )}
+                    </SubMenu>
+                  );
+                } else {
+                  return (
+                    <Link to={`${menuItem.link}`}>
+                      <MenuItem
+                        className="flex w-full text-start"
+                        icon={<FontAwesomeIcon icon={icons[menuItem.icon]} />}
+                        key={idx}
+                      >
+                        {menuItem.name}
+                      </MenuItem>
+                    </Link>
+                  );
+                }
+              })}
             </Menu>
           </div>
           <Menu classname="w-full text-lg">
