@@ -41,7 +41,7 @@ const icons: any = {
 export default function NavigationBar() {
   const { collapseSidebar, collapsed, rtl } = useProSidebar();
   return (
-    <div className="flex h-full" dir={rtl ? "rtl" : "ltr"}>
+    <div className="flex sticky top-0 h-full" dir={rtl ? "rtl" : "ltr"}>
       <Sidebar customBreakPoint="0px" width="270px" collapsed={collapsed}>
         <div className="flex flex-col h-fill justify-center">
           <div>
