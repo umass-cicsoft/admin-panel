@@ -7,7 +7,9 @@ export const memberListener = async (
 ) => {
   const membersRef = ref(firebaseDatabase, "members");
   onValue(membersRef, (snapshot) => {
-    const memberList: MemberType[] = Object.values(snapshot.val());
+    const memberList: MemberType[] = Object.values(snapshot.val()).map(
+      (member: any) => ({ ...member, id: member.umass_email.split("@")[0] })
+    );
     callback_fn(memberList);
   });
 };

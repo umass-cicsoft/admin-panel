@@ -2,6 +2,7 @@ export type MemberType = {
   first_name: string;
   github_link?: string;
   graduation_year: number;
+  id: string;
   interest_response?: string;
   joined_on: string;
   last_name: string;
