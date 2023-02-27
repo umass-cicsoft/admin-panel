@@ -1,5 +1,5 @@
-import { ref, onValue, update } from "firebase/database";
-import { MemberStatus, MemberType } from "../types/types";
+import { ref, onValue, update, get } from "firebase/database";
+import { MemberRole, MemberStatus, MemberType } from "../types/types";
 import { firebaseDatabase } from "./index";
 
 export const memberListener = async (
@@ -15,18 +15,52 @@ export const memberListener = async (
 };
 
 export const updateMemberStatus = async (props: {
-  id: string;
+  ids: string[];
   newStatus: MemberStatus;
 }) => {
   // given a list of user ids and the desired status set each user's status to the newStatus
-  const memberRef = ref(firebaseDatabase, `members/${props.id}`);
-  update(memberRef, {
-    status: props.newStatus,
-  })
-    .then(() => {
-      console.log("updated member status");
+  props.ids.forEach((id) => {
+    const memberRef = ref(firebaseDatabase, `members/${id}`);
+    update(memberRef, {
+      status: props.newStatus,
     })
-    .catch((error) => {
-      console.log("error updating member status", error);
-    });
+      .then(() => {
+        console.log("updated member status");
+      })
+      .catch((error) => {
+        console.log("error updating member status", error);
+      });
+  });
+};
+
+export const updateMemberRole = async (props: {
+  ids: string[];
+  newRole: MemberRole;
+}) => {
+  // given a list of user ids and the desired status set each user's status to the newStatus
+  props.ids.forEach((id) => {
+    const memberRef = ref(firebaseDatabase, `members/${id}`);
+    get(memberRef)
+      .then((snapshot) => {
+        if (
+          snapshot.exists() &&
+          snapshot.val().status === MemberStatus.MEMBER
+        ) {
+          update(memberRef, {
+            role: props.newRole,
+          })
+            .then(() => {
+              console.log("updated member role");
+            })
+            .catch((error) => {
+              console.log("error updating member role", error);
+            });
+        } else {
+          console.log("User is non-member or does not exist");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
 };

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { memberListener, updateMemberStatus } from "../../services/members";
-import { MemberStatus, MemberType } from "../../types/types";
+import {
+  memberListener,
+  updateMemberRole,
+  updateMemberStatus,
+} from "../../services/members";
+import { MemberRole, MemberStatus, MemberType } from "../../types/types";
 
 export default function Members() {
   const [memberData, setMemberData] = useState<MemberType[]>([]);
@@ -19,8 +23,12 @@ export default function Members() {
     });
   }, []);
 
-  const updateStatus = (id: string, status: MemberStatus) => {
-    updateMemberStatus({ id: id, newStatus: status });
+  const updateStatus = (ids: string[], status: MemberStatus) => {
+    updateMemberStatus({ ids: ids, newStatus: status });
+  };
+
+  const updateRole = (ids: string[], role: MemberRole) => {
+    updateMemberRole({ ids: ids, newRole: role });
   };
 
   return (
@@ -33,9 +41,16 @@ export default function Members() {
           ))}
           <button
             className="bg-yellow-500 text-white p-3 rounded-md hover:bg-yellow-600"
-            onClick={() => updateStatus(member.id, MemberStatus.WAITLISTED)}
+            onClick={() => updateStatus([member.id], MemberStatus.WAITLISTED)}
           >
             Waitlist
+          </button>
+
+          <button
+            className="bg-yellow-500 text-white p-3 rounded-md hover:bg-yellow-600"
+            onClick={() => updateRole([member.id], MemberRole.ADMIN)}
+          >
+            Admin
           </button>
           <br />
         </div>
