@@ -15,6 +15,7 @@ export default function Members() {
     "major",
     "graduation_year",
     "status",
+    "role",
   ].map((field) => field as keyof MemberType);
 
   useEffect(() => {
