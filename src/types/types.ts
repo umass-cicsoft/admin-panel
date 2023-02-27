@@ -1,3 +1,17 @@
+export enum MemberRole {
+  ADMIN = "admin",
+  DEVELOPER = "developer",
+  OUTREACH = "outreach",
+  TEACHING = "teaching",
+}
+
+export enum MemberStatus {
+  MEMBER = "member",
+  WAITLISTED = "waitlisted",
+  UNDECIDED = "undecided",
+  DENIED = "denied",
+}
+
 export type MemberType = {
   first_name: string;
   github_link?: string;
@@ -8,7 +22,7 @@ export type MemberType = {
   last_name: string;
   linkedin_link?: string;
   major: string;
-  role?: "admin" | "developer" | "outreach" | "teaching";
-  status: "member" | "waitlisted" | "undecided" | "denied";
+  role?: MemberRole;
+  status?: MemberStatus;
   umass_email: string;
 };

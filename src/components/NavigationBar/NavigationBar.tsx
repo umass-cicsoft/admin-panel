@@ -77,7 +77,10 @@ export default function NavigationBar() {
                       {menuItem.subMenu.map(
                         (subMenuItem: any, subIdx: number) => {
                           return (
-                            <Link to={`${menuItem.link}/${subMenuItem.link}`}>
+                            <Link
+                              key={subIdx}
+                              to={`${menuItem.link}/${subMenuItem.link}`}
+                            >
                               <MenuItem
                                 className="flex w-full text-start"
                                 icon={
@@ -85,7 +88,6 @@ export default function NavigationBar() {
                                     icon={icons[subMenuItem.icon]}
                                   />
                                 }
-                                key={subIdx}
                               >
                                 {subMenuItem.name}
                               </MenuItem>
@@ -97,11 +99,10 @@ export default function NavigationBar() {
                   );
                 } else {
                   return (
-                    <Link to={`${menuItem.link}`}>
+                    <Link key={idx} to={`${menuItem.link}`}>
                       <MenuItem
                         className="flex w-full text-start"
                         icon={<FontAwesomeIcon icon={icons[menuItem.icon]} />}
-                        key={idx}
                       >
                         {menuItem.name}
                       </MenuItem>
