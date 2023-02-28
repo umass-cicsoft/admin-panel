@@ -24,14 +24,6 @@ export default function Members() {
     });
   }, []);
 
-  const updateStatus = (ids: string[], status: MemberStatus) => {
-    updateMemberStatus({ ids: ids, newStatus: status });
-  };
-
-  const updateRole = (ids: string[], role: MemberRole) => {
-    updateMemberRole({ ids: ids, newRole: role });
-  };
-
   return (
     <div>
       <h1>Members</h1>
@@ -42,14 +34,16 @@ export default function Members() {
           ))}
           <button
             className="bg-yellow-500 text-white p-3 rounded-md hover:bg-yellow-600"
-            onClick={() => updateStatus([member.id], MemberStatus.WAITLISTED)}
+            onClick={() =>
+              updateMemberStatus([member.id], MemberStatus.WAITLISTED)
+            }
           >
             Waitlist
           </button>
 
           <button
             className="bg-yellow-500 text-white p-3 rounded-md hover:bg-yellow-600"
-            onClick={() => updateRole([member.id], MemberRole.ADMIN)}
+            onClick={() => updateMemberRole([member.id], MemberRole.ADMIN)}
           >
             Admin
           </button>

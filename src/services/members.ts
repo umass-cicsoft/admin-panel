@@ -14,15 +14,15 @@ export const memberListener = async (
   });
 };
 
-export const updateMemberStatus = async (props: {
-  ids: string[];
-  newStatus: MemberStatus;
-}) => {
+export const updateMemberStatus = async (
+  ids: string[],
+  newStatus: MemberStatus
+) => {
   // given a list of user ids and the desired status set each user's status to the newStatus
-  props.ids.forEach((id) => {
+  ids.forEach((id) => {
     const memberRef = ref(firebaseDatabase, `members/${id}`);
     update(memberRef, {
-      status: props.newStatus,
+      status: newStatus,
     })
       .then(() => {
         console.log("updated member status");
@@ -33,12 +33,9 @@ export const updateMemberStatus = async (props: {
   });
 };
 
-export const updateMemberRole = async (props: {
-  ids: string[];
-  newRole: MemberRole;
-}) => {
+export const updateMemberRole = async (ids: string[], newRole: MemberRole) => {
   // given a list of user ids and the desired status set each user's status to the newStatus
-  props.ids.forEach((id) => {
+  ids.forEach((id) => {
     const memberRef = ref(firebaseDatabase, `members/${id}`);
     get(memberRef)
       .then((snapshot) => {
@@ -47,7 +44,7 @@ export const updateMemberRole = async (props: {
           snapshot.val().status === MemberStatus.MEMBER
         ) {
           update(memberRef, {
-            role: props.newRole,
+            role: newRole,
           })
             .then(() => {
               console.log("updated member role");
