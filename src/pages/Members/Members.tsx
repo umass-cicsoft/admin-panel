@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   memberListener,
+  sortMembers,
   updateMemberRole,
   updateMemberStatus,
 } from "../../services/members";
@@ -20,7 +21,7 @@ export default function Members() {
 
   useEffect(() => {
     memberListener((data: MemberType[]) => {
-      setMemberData(data);
+      setMemberData(sortMembers(data, "first_name", true));
     });
   }, []);
 

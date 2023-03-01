@@ -61,3 +61,57 @@ export const updateMemberRole = async (ids: string[], newRole: MemberRole) => {
       });
   });
 };
+
+/**
+ * @descipriton Sort a list of Members based on a key.
+ *
+ * @param {MemberType[]} members - A list of objects.
+ * @param {keyof MemberType} key - The key to sort by.
+ * If it's a number, sort numerically. If it's a string, sort alphabetically.
+ *
+ * @returns {MemberType[]} The sorted list of members.
+ */
+export const sortMembers = (
+  members: MemberType[],
+  key: keyof MemberType,
+  isAsc: boolean
+) => {
+  const sortedMembers = members.sort((a, b) => {
+    if (a[key] === undefined && b[key] !== undefined) {
+      return -1;
+    } else if (a[key] !== undefined && b[key] === undefined) {
+      return 1;
+    } else if (a[key] === undefined && b[key] === undefined) {
+      return 0;
+    } else if (typeof a[key] === "number") {
+      return Number(a[key]) - Number(b[key]);
+    } else if (typeof a[key] === "string") {
+      return String(a[key])!.localeCompare(String(b[key]));
+    } else {
+      return 0;
+    }
+  });
+
+  return isAsc ? sortedMembers : sortedMembers.reverse();
+};
+
+/**
+ * @description Filter a list of Members based on a key and value.
+ *
+ * @param {MemberType[]} members - A list of objects.
+ * @param {keyof MemberType} key - The key to filter by.
+ * @param {any} value - The value to filter by.
+ * @returns {MemberType[]} The filtered list of members.
+ * @example
+ * filterMembers(members, "role", MemberRole.ADMIN)
+ * returns a list of members with the role of admin
+ *  */
+export const filterMembers = (
+  members: MemberType[],
+  key: keyof MemberType,
+  value:
+    | typeof MemberRole[keyof typeof MemberRole]
+    | typeof MemberStatus[keyof typeof MemberStatus]
+) => {
+  return members.filter((member) => member[key] === value);
+};
