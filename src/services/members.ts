@@ -14,11 +14,16 @@ export const memberListener = async (
   });
 };
 
+/**
+ * @descipriton Update the Status for a list of Members given their ids and desired status
+ *
+ * @param {string[]} ids - A list of member ids
+ * @param {MemberStatus} newStatus - The new status to set for the members.
+ */
 export const updateMemberStatus = async (
   ids: string[],
   newStatus: MemberStatus
 ) => {
-  // given a list of user ids and the desired status set each user's status to the newStatus
   ids.forEach((id) => {
     const memberRef = ref(firebaseDatabase, `members/${id}`);
     update(memberRef, {
@@ -33,8 +38,13 @@ export const updateMemberStatus = async (
   });
 };
 
+/**
+ * @descipriton Update the Role for a list of Members given their ids and desired role
+ *
+ * @param {string[]} ids - A list of member ids
+ * @param {MemberRole} newRole - The new role to set for the members.
+ */
 export const updateMemberRole = async (ids: string[], newRole: MemberRole) => {
-  // given a list of user ids and the desired status set each user's status to the newStatus
   ids.forEach((id) => {
     const memberRef = ref(firebaseDatabase, `members/${id}`);
     get(memberRef)
@@ -75,7 +85,7 @@ export const sortMembers = (
   members: MemberType[],
   key: keyof MemberType,
   isAsc: boolean
-) => {
+): MemberType[] => {
   const sortedMembers = members.sort((a, b) => {
     if (a[key] === undefined && b[key] !== undefined) {
       return -1;
@@ -101,17 +111,17 @@ export const sortMembers = (
  * @param {MemberType[]} members - A list of objects.
  * @param {keyof MemberType} key - The key to filter by.
  * @param {any} value - The value to filter by.
+ *
  * @returns {MemberType[]} The filtered list of members.
+ *
  * @example
  * filterMembers(members, "role", MemberRole.ADMIN)
  * returns a list of members with the role of admin
  *  */
-export const filterMembers = (
+export const filterMembers = <T extends keyof MemberType>(
   members: MemberType[],
-  key: keyof MemberType,
-  value:
-    | typeof MemberRole[keyof typeof MemberRole]
-    | typeof MemberStatus[keyof typeof MemberStatus]
-) => {
+  key: T,
+  value: MemberType[T]
+): MemberType[] => {
   return members.filter((member) => member[key] === value);
 };
