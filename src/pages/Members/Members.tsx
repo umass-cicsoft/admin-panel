@@ -32,6 +32,7 @@ export default function Members() {
   ].map((field) => field as keyof MemberType);
 
   useEffect(() => {
+    // Get all members from database and set them to memberData
     memberListener((data: MemberType[]) => {
       setMemberData(data);
       setDisplayMemberData(data);
@@ -39,6 +40,7 @@ export default function Members() {
   }, []);
 
   useEffect(() => {
+    // Filter members based on activeTab and set them to displayMemberData
     setDisplayMemberData(
       memberData.filter(
         (member) => member.status === activeTab || activeTab === AllTab.ALL
@@ -49,6 +51,7 @@ export default function Members() {
   return (
     <div className="flex justify-center flex-col p-2">
       <div className="flex justify-end">
+        {/* Showcasing all the tabs for the MemberPage */}
         {[
           AllTab.ALL,
           MemberStatus.MEMBER,
@@ -66,10 +69,10 @@ export default function Members() {
       </div>
       <div>
         {/* 
-          Div to make the toolbar for filtering and sorting members, search bar, etc.
-        
+          Toolbar for tools such as filtering and sorting members, search bar, etc.
         */}
       </div>
+      {/* Table showing members' data */}
       <table className="table-auto border border-slate-600">
         <thead>
           <tr>
@@ -77,6 +80,8 @@ export default function Members() {
               <input
                 type="checkbox"
                 onChange={() => {
+                  // If all members are selected, unselect all members
+                  // Otherwise, select all members
                   if (selectedMemberIds.size === displayMemberData.length) {
                     setSelectedMemberIds(new Set());
                   } else {
@@ -86,6 +91,8 @@ export default function Members() {
                   }
                 }}
                 checked={
+                  // If all members are selected, check the checkbox
+                  // Otherwise, uncheck the checkbox
                   selectedMemberIds.size === displayMemberData.length
                     ? true
                     : false
@@ -106,6 +113,8 @@ export default function Members() {
                 <input
                   type="checkbox"
                   onChange={() => {
+                    // If member is selected, unselect member
+                    // Otherwise, select member
                     if (selectedMemberIds.has(member.id)) {
                       selectedMemberIds.delete(member.id);
                       setSelectedMemberIds(new Set(selectedMemberIds));
