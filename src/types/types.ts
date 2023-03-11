@@ -26,3 +26,9 @@ export type MemberType = {
   status?: MemberStatus;
   umass_email: string;
 };
+
+export enum AllTab {
+  ALL = "all",
+}
+
+export type MemberPageTab = MemberStatus | AllTab;
