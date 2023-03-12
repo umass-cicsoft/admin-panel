@@ -13,6 +13,7 @@ import {
   MemberStatus,
   MemberType,
 } from "../../types/types";
+import { SearchBar } from "../../components";
 
 export default function Members() {
   const [memberData, setMemberData] = useState<MemberType[]>([]);
@@ -67,10 +68,9 @@ export default function Members() {
           </button>
         ))}
       </div>
-      <div>
-        {/* 
-          Toolbar for tools such as filtering and sorting members, search bar, etc.
-        */}
+      <div className="flex ">
+        {/* Toolbar for tools such as filtering and sorting members, search bar, etc. */}
+        <SearchBar data={memberData} setData={setDisplayMemberData} />
       </div>
       {/* Table showing members' data */}
       <table className="table-auto border border-slate-600">
