@@ -47,6 +47,7 @@ export default function Members() {
         (member) => member.status === activeTab || activeTab === AllTab.ALL
       )
     );
+    setSelectedMemberIds(new Set());
   }, [activeTab, memberData]);
 
   return (
@@ -61,6 +62,7 @@ export default function Members() {
           MemberStatus.UNDECIDED,
         ].map((status: MemberPageTab) => (
           <button
+            key={status}
             className="bg-blue-500 text-white p-3 hover:bg-blue-600"
             onClick={() => setActiveTab(status)}
           >

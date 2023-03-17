@@ -8,17 +8,32 @@ export type SearchBarProps = {
 
 const SearchBar = (props: SearchBarProps) => {
   const [searchQuery, setSearchQuery] = React.useState("");
+  const searchFields: (keyof MemberType)[] = [
+    "first_name",
+    "github_link",
+    "graduation_year",
+    "id",
+    "last_name",
+    "linkedin_link",
+    "major",
+    "role",
+    "status",
+    "umass_email",
+  ];
 
   useEffect(() => {
     const filteredData = props.data.filter((member: MemberType) =>
-      Object.values(member)
-        .reduce((acc, val) => acc + " " + val, "")
+      searchFields
+        .reduce((acc, val) => {
+          return member[val] !== undefined ? acc + " " + member[val] : acc;
+        }, "")
         .toString()
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
     );
     props.setData(filteredData);
-  }, [props, searchQuery]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
 
   const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
